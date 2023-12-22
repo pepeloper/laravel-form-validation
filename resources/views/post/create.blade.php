@@ -3,7 +3,10 @@
     <h2 class="font-medium text-3xl">Posts</h2>
     <ul class=mt-4>
       @forelse ($posts as $post)
-        <li class="my-1">{{ $post->title }}</li>
+        <li class="my-1 border-b border-gray-700 py-2">
+          <p>{{ $post->title }}</p>
+          <p>Etiquetas: {{ $post->tags }}</p>
+        </li>
       @empty
           <p>No hay posts creados</p>
       @endforelse
@@ -75,6 +78,23 @@
           <label for="allow_comments" class="ml-2 block font-medium leading-6 text-gray-100">Permitir comentarios</label>
         </div>
         @error('allow_comments')
+          <p class="text-red-400">{{ $message }}</p>
+        @enderror
+      </div>
+
+      <div class=mt-4>
+        <label for="tags" class="block font-medium leading-6 text-gray-100">Etiquetas</label>
+        <div class="mt-2">
+          <input
+            value="{{ old('tags') }}"
+            type="text"
+            name="tags"
+            id="tags"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+          >
+          <p class="text-sm text-gray-300 mt-1">Mínimo 3 etiquetas separadas por ':'</p>
+        </div>
+        @error('tags')
           <p class="text-red-400">{{ $message }}</p>
         @enderror
       </div>

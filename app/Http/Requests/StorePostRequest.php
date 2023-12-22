@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Delimiter;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
@@ -26,6 +27,10 @@ class StorePostRequest extends FormRequest
             'content' => 'required',
             'publication_date' => 'required|after_or_equal:today',
             'allow_comments' => 'nullable',
+            'tags' => [
+                'required',
+                (new Delimiter())->separatedBy(':')->minimum(2),
+            ],
         ];
     }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->date('publication_date');
             $table->boolean('allow_comments');
+            $table->string('tags');
             $table->timestamps();
         });
     }
